@@ -1,0 +1,13 @@
+{
+    "vcenter_server":"192.168.2.200",
+    "username":"administrator@vsphere.local",
+    "password":"VMware1!",
+    "datastore":"NVMe",
+    "datacenter":"MyDataCenter",
+    "resource_pool":"Resources",
+    "host":"192.168.2.206",
+    "cluster": "HomeCluster",
+    "network": "VPG-110-LAB",
+    "ssh_username":"jetbrains",
+    "ssh_password":"jetbrains"
+}
