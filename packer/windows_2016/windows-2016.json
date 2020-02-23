@@ -1,0 +1,53 @@
+{
+    "builders": [
+      {
+        "type": "vsphere-iso",
+  
+        "vcenter_server":      "{{user `vcenter_server`}}",
+        "username":            "{{user `username`}}",
+        "password":            "{{user `password`}}",
+        "insecure_connection": "true",
+  
+        "vm_name": "template_windows2016",
+        "datastore": "{{user `datastore`}}",
+        "resource_pool": "{{user `resource_pool`}}",
+        "host":     "{{user `host`}}",
+        "convert_to_template": "true",
+        "cluster": "{{user `cluster`}}",
+        "network": "{{user `network`}}",
+  
+        "guest_os_type": "windows9_64Guest",
+  
+        "communicator": "winrm",
+        "winrm_username": "Administrator",
+        "winrm_password": "VMware1!",
+  
+        "CPUs":             1,
+        "RAM":              4096,
+        "RAM_reserve_all": true,
+  
+        "disk_controller_type":  "lsilogic-sas",
+        "disk_size":        32768,
+        "disk_thin_provisioned": true,
+  
+        "network_card": "vmxnet3",
+  
+        "iso_paths": [
+          "[datastore1 (2)] ISO-Windows/Windows-2016.iso",
+          "[datastore1 (2)] ISO-Windows/VMware-tools-windows-10.3.10.iso"
+        ],
+  
+        "floppy_files": [
+          "{{template_dir}}/setup/"
+        ]
+      }
+    ],
+  
+    "provisioners": [
+      {
+        "type": "windows-shell",
+        "inline": ["dir c:\\"]
+      }
+    ]
+  }
+  
