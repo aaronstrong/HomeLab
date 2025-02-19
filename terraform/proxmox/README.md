@@ -120,3 +120,71 @@ https://cloudbase-init.readthedocs.io/en/latest/plugins.html#configuring-selecte
 https://github.com/ZacksHomeLab/terraform-proxmox-cloudinit-vm/blob/main/main.tf
 https://cloudbase.it/cloudbase-init/
 https://www.reddit.com/r/Proxmox/comments/1ch32wt/proxmox_windows_cloudbaseinit/
+---
+2-19 attemp1
+cloudbase-init.conf
+```conf
+[DEFAULT]
+username=Administrator
+groups=Administrators
+rename_admin_user=true
+inject_user_password=false
+config_drive_raw_hhd=true
+config_drive_cdrom=true
+config_drive_vfat=true
+bsdtar_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\bin\bsdtar.exe
+mtools_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\bin\
+verbose=true
+debug=true
+log_dir=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\log\
+log_file=cloudbase-init.log
+default_log_levels=comtypes=INFO,suds=INFO,iso8601=WARN,requests=WARN
+logging_serial_port_settings=
+mtu_use_dhcp_config=true
+ntp_use_dhcp_config=true
+local_scripts_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\LocalScripts\
+check_latest_version=true
+plugins=cloudbaseinit.plugins.common.sethostname.SetHostNamePlugin,
+cloudbaseinit.plugins.common.networkconfig.NetworkConfigPlugin,
+cloudbaseinit.plugins.windows.extendvolumes.ExtendVolumesPlugin,
+cloudbaseinit.plugins.common.userdata.UserDataPlugin,
+cloudbaseinit.plugins.common.sshpublickeys.SetUserSSHPublicKeysPlugin,
+cloudbaseinit.plugins.common.setuserpassword.SetUserPasswordPlugin,
+cloudbaseinit.plugins.windows.createuser.CreateUserPlugin,
+cloudbaseinit.plugins.windows.updates.WindowsAutoUpdatesPlugin
+metadata_services=cloudbaseinit.metadata.services.configdrive.ConfigDriveService
+```
+cloudbase-init-unattend.conf
+```conf
+[DEFAULT]
+username=Administrator
+groups=Administrators
+rename_admin_user=true
+inject_user_password=true
+config_drive_raw_hhd=true
+config_drive_cdrom=true
+config_drive_vfat=true
+bsdtar_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\bin\bsdtar.exe
+mtools_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\bin\
+verbose=true
+debug=true
+log_dir=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\log\
+log_file=cloudbase-init-unattend.log
+default_log_levels=comtypes=INFO,suds=INFO,iso8601=WARN,requests=WARN
+logging_serial_port_settings=
+mtu_use_dhcp_config=true
+ntp_use_dhcp_config=true
+local_scripts_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\LocalScripts\
+check_latest_version=false
+plugins=cloudbaseinit.plugins.common.sethostname.SetHostNamePlugin,
+cloudbaseinit.plugins.common.networkconfig.NetworkConfigPlugin,
+cloudbaseinit.plugins.windows.extendvolumes.ExtendVolumesPlugin,
+cloudbaseinit.plugins.common.userdata.UserDataPlugin,
+cloudbaseinit.plugins.common.sshpublickeys.SetUserSSHPublicKeysPlugin,
+cloudbaseinit.plugins.common.setuserpassword.SetUserPasswordPlugin,
+cloudbaseinit.plugins.windows.createuser.CreateUserPlugin,
+cloudbaseinit.plugins.windows.updates.WindowsAutoUpdatesPlugin
+metadata_services=cloudbaseinit.metadata.services.configdrive.ConfigDriveService
+allow_reboot=false
+stop_service_on_exit=false
+```
