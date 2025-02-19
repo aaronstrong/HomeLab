@@ -188,3 +188,74 @@ metadata_services=cloudbaseinit.metadata.services.configdrive.ConfigDriveService
 allow_reboot=false
 stop_service_on_exit=false
 ```
+---
+phase 2
+cloudbase-init.conf
+```confg
+[DEFAULT]
+username=cloudinit
+groups=Administrators
+rename_admin_user=true
+inject_user_password=true
+first_logon_behavior=no
+config_drive_raw_hhd=true
+config_drive_cdrom=true
+config_drive_vfat=true
+bsdtar_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\bin\bsdtar.exe
+mtools_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\bin\
+verbose=true
+debug=true
+log_dir=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\log\
+log_file=cloudbase-init.log
+default_log_levels=comtypes=INFO,suds=INFO,iso8601=WARN,requests=WARN
+logging_serial_port_settings=
+mtu_use_dhcp_config=true
+ntp_use_dhcp_config=true
+local_scripts_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\LocalScripts\
+check_latest_version=true
+plugins=cloudbaseinit.plugins.common.sethostname.SetHostNamePlugin,
+cloudbaseinit.plugins.common.networkconfig.NetworkConfigPlugin,
+cloudbaseinit.plugins.windows.extendvolumes.ExtendVolumesPlugin,
+cloudbaseinit.plugins.common.userdata.UserDataPlugin,
+cloudbaseinit.plugins.common.sshpublickeys.SetUserSSHPublicKeysPlugin,
+cloudbaseinit.plugins.common.setuserpassword.SetUserPasswordPlugin,
+cloudbaseinit.plugins.windows.createuser.CreateUserPlugin,
+cloudbaseinit.plugins.windows.updates.WindowsAutoUpdatesPlugin
+metadata_services=cloudbaseinit.metadata.services.configdrive.ConfigDriveService
+```
+cloudbase-int-unattend.conf
+```conf
+[DEFAULT]
+username=cloudinit
+groups=Administrators
+rename_admin_user=true
+inject_user_password=true
+first_logon_behavior=no
+config_drive_raw_hhd=true
+config_drive_cdrom=true
+config_drive_vfat=true
+bsdtar_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\bin\bsdtar.exe
+mtools_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\bin\
+verbose=true
+debug=true
+log_dir=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\log\
+log_file=cloudbase-init.log
+default_log_levels=comtypes=INFO,suds=INFO,iso8601=WARN,requests=WARN
+logging_serial_port_settings=
+mtu_use_dhcp_config=true
+ntp_use_dhcp_config=true
+local_scripts_path=C:\Program Files\Cloudbase Solutions\Cloudbase-Init\LocalScripts\
+check_latest_version=true
+plugins=cloudbaseinit.plugins.common.sethostname.SetHostNamePlugin,
+cloudbaseinit.plugins.common.networkconfig.NetworkConfigPlugin,
+cloudbaseinit.plugins.windows.extendvolumes.ExtendVolumesPlugin,
+cloudbaseinit.plugins.common.userdata.UserDataPlugin,
+cloudbaseinit.plugins.common.sshpublickeys.SetUserSSHPublicKeysPlugin,
+cloudbaseinit.plugins.common.setuserpassword.SetUserPasswordPlugin,
+cloudbaseinit.plugins.windows.createuser.CreateUserPlugin,
+cloudbaseinit.plugins.windows.updates.WindowsAutoUpdatesPlugin
+metadata_services=cloudbaseinit.metadata.services.configdrive.ConfigDriveService
+allow_reboot=false
+stop_service_on_exit=false
+
+```
