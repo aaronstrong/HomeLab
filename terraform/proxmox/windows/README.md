@@ -1,6 +1,9 @@
 # PROXMOX VM Creation
 
-Module creates VM instances on a PROXMOX host.
+Module creates VM instances on a PROXMOX host using an existing template.
+
+* For Windows, create an image with Cloudbase-init installed.
+* For Linux, create an image with Cloud-init installed.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
