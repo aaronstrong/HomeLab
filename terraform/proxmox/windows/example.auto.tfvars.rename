@@ -1,0 +1,3 @@
+proxmox_api_url          = "<PROXMOX_IP>"
+proxmox_api_token_id     = "<PROXMOX_TOKEN_ID>"
+proxmox_api_token_secret = "<PROXMOX_TOKEN_SECRENT>"

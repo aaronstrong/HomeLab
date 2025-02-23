@@ -1,27 +1,27 @@
-variable "vm_enable" {
-  description = "Enables or Disables VM creation. Defaults to false"
-  type        = bool
+variable "proxmox_api_url" {
+  description = "The IP Address of the ProxMox server."
+  type        = string
+}
+
+variable "proxmox_api_token_id" {
+  description = "The token id."
+  type        = string
+}
+
+variable "proxmox_api_token_secret" {
+  description = "The secret assigned to the token id."
+  type        = string
+}
+
+variable "proxmox_tls_insecure" {
+  description = "Change to true if you are using self-signed certificates"
   default     = true
 }
 
-variable "name" {
-  description = "name of the vm"
-  type        = string
-  default     = "tf-vm"
-}
-
-variable "desc" {
-  description = "VM description"
-  type        = string
-  default     = "managed by terraform"
-}
-
 variable "agent" {
-  default = 1
-}
-
-variable "vmid" {
-  default = "200"
+  description = "Set to 1 to enable the QEMU Guest Agent."
+  type        = number
+  default     = 1
 }
 
 variable "target_node" {
@@ -30,16 +30,10 @@ variable "target_node" {
   default     = "pmox1"
 }
 
-variable "clone" {
-  default = "w2025-init"
-}
-
-variable "full_clone" {
-  default = false
-}
-
 variable "onboot" {
-  default = true
+  description = "Whether to have the VM startup after the PVE node starts."
+  type        = bool
+  default     = true
 }
 
 variable "boot" {
@@ -58,10 +52,6 @@ variable "automatic_reboot" {
   default = false
 }
 
-variable "static_ip" {
-  default = "192.168.4.51"
-}
-
 variable "cidr" {
   default = "24"
 }
@@ -70,49 +60,42 @@ variable "gateway" {
   default = "192.168.4.1"
 }
 
-variable "ciuser" {
-  default = "Admin"
-}
-
-variable "cipassword" {
-  default = "P@ssw0rd"
-}
-
 variable "nameserver" {
-  default = "127.0.0.1,192.168.4.1"
+  default = "127.0.0.1 192.168.4.1"
 }
 
 variable "searchdomain" {
   default = "demolab.local"
 }
 
-
 variable "serverlist" {
-  type = list(map(string))
-  default = [
-    {
-      name       = "dc1"
-      vmid       = "200"
-      static_ip  = "192.168.4.62"
-      ciuser     = "Admin"
-      cipassword = "password"
-      cores      = 2
-      sockets    = 2
-      memory     = 8196
-      ballon     = 4096
-      qemu_os    = "win11"
-    },
-    {
-      name       = "dc2"
-      vmid       = "201"
-      static_ip  = "192.168.4.63"
-      ciuser     = "Admin"
-      cipassword = "password"
-      cores      = 2
-      sockets    = 2
-      memory     = 8196
-      ballon     = 4096
-      qemu_os    = "win11"
-    },
-  ]
+  type = list(object({
+    name       = string
+    desc       = string
+    vmid       = number
+    clone      = string # Template to clone
+    full_clone = string # True for full clone, false for linked clone
+    static_ip  = string
+    ciuser     = string
+    cipassword = string
+    cores      = number
+    sockets    = number
+    memory     = number
+    ballon     = number
+    qemu_os    = string
+
+    # Disk Configuration
+    ide0 = object({
+      storage   = string
+      cloudinit = bool
+    })
+    scsi0 = object({
+      storage  = string
+      size     = string
+      iothread = bool
+      cache    = string
+      discard  = bool
+    })
+  }))
+  default = []
 }
