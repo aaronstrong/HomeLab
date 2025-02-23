@@ -2,11 +2,15 @@ $domainName = "contoso.local"
 $netbiosName = "contoso"
 $safeModeAdminstratorPassword = ConvertTo-SecureString 'BestCloud1!' -AsPlainText -Force
 $logpath = "C:\log\log.txt"
-$domainMode = "Win2012R2"
-$forestMode = "Win2012R2"
+$domainMode = "Win2025"
+$forestMode = "Win2025"
 
 # Install Module
-Install-WindowsFeature -Name RSAT-AD-PowerShell
+Install_WindowsFeature -Name AD-Domain-Services, DNS -IncludeManagementTools
+Install-WindowsFeature -Name RSAT-AD-PowerShell -IncludeManagementTools
+
+# Import Active Directory Module into the PowerShell Session
+Import-Module ActiveDirectory
 
 # Import-Module ADDSDeployment
 Install-ADDSForest `
